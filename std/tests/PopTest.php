@@ -14,6 +14,13 @@ class PopTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+//        $keys = array('foo', 5, 10, 'bar' => 'zzz');
+//        $a = array_fill_keys($keys, 'banana');
+//        print_r($keys);
+//        print_r($a);
+//        die('qwe');
+
+
         $std = new stdClass();
         $std->a = 'aa';
         $std->b = 'bb';
@@ -68,8 +75,10 @@ class PopTest extends PHPUnit_Framework_TestCase
 
     function test_object_fill_keys()
     {
-        $keys = array('foo', 5, 10, 'bar');
+        $keys = (object)['foo', 5, 10, 'bar'];
+        var_dump($keys);
         $obj = std::object_fill_keys($keys, 'banana');
+        var_dump($obj);
         $this->assertEquals('banana', $obj->{10});
         $this->assertEquals('banana', $obj->bar);
     }
@@ -94,8 +103,8 @@ class PopTest extends PHPUnit_Framework_TestCase
 		};
 		$array1 = array("a" => 1, "b" => 2, "c" => 3, "d" => 4, "e" => 5);
 		$array2 = array(6, 7, 8, 9, 10, 11, 12);
-        $obj1 = std::object_filter($array1, $odd);
-        $obj2 = std::object_filter($array2, $even);
+        $obj1 = std::object_filter((object)$array1, $odd);
+        $obj2 = std::object_filter((object)$array2, $even);
         $this->assertEquals(3, $obj1->c);
         $this->assertEquals(6, $obj2->{0});
     }

@@ -45,7 +45,7 @@ class std
         return self::object($arrOutput);
     }
 
-    public static function object_combine( stdClass $keys , stdClass $values)
+    public static function object_combine(stdClass $keys, stdClass $values)
     {
         $arrOutput = array_combine((array)$keys, (array)$values);
         return self::object($arrOutput);
@@ -56,23 +56,23 @@ class std
         $arrOutput = array_count_values((array)$object);
         return self::object($arrOutput);
     }
-    
-    public static function object_fill_keys ( array $keys , $value )
+
+    public static function object_fill_keys(stdClass $keys, $value)
     {
-		$arrOutput = array_fill_keys($keys, $value);
-		return self::object($arrOutput);
-	}
-	
-    public static function object_fill($start_index ,$num, $value)
+        $arrOutput = array_fill_keys((array)$keys, $value);
+        return self::object($arrOutput);
+    }
+
+    public static function object_fill($start_index, $num, $value)
     {
-		$arrOutput = array_fill($start_index ,$num, $value);
-		return self::object($arrOutput);
-	}
-	
-    public static function object_filter(array $array, $callback, $flag = 0 )
+        $arrOutput = array_fill($start_index, $num, $value);
+        return self::object($arrOutput);
+    }
+
+    public static function object_filter(stdClass $std, $callback, $flag = 0)
     {
-		$arrOutput = array_filter($array, $callback, $flag);
-		return self::object($arrOutput);
-	}
+        $arrOutput = array_filter((array)$std, $callback, $flag);
+        return self::object($arrOutput);
+    }
 }
 

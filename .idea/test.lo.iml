@@ -9,10 +9,22 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/../CI_phpStorm" />
           <root url="file://$MODULE_DIR$/../system" />
+          <root url="file:///usr/local/src" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/../CI_phpStorm" />
           <root url="file://$MODULE_DIR$/../system" />
+          <root url="file:///usr/local/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar:///usr/local/src/phpunit-5.4.4.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar:///usr/local/src/phpunit-5.4.4.phar/" />
         </SOURCES>
       </library>
     </orderEntry>

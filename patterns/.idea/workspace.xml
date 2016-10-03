@@ -96,8 +96,8 @@
       <file leaf-file-name="validation3.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/validation3.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="789">
-              <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+            <state relative-caret-position="452">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -106,7 +106,7 @@
       <file leaf-file-name="TestCase.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/TestCase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
+            <state relative-caret-position="396">
               <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
@@ -126,7 +126,7 @@
       <file leaf-file-name="bootstrap.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="342">
               <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding>
                 <element signature="e#7#161#0#PHP" expanded="true" />
@@ -249,16 +249,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="patterns" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="patterns" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -349,11 +339,13 @@
       <workItem from="1475145116786" duration="1224000" />
       <workItem from="1475479258068" duration="8186000" />
       <workItem from="1475488217260" duration="16860000" />
+      <workItem from="1475509670844" duration="12000" />
+      <workItem from="1475509686081" duration="72000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53188000" />
+    <option name="totallyTimeSpent" value="53272000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -368,7 +360,7 @@
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21337755" sideWeight="0.4949349" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21779989" sideWeight="0.4949349" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914045" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07232705" sideWeight="0.50193477" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -679,7 +671,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="342">
           <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding>
             <element signature="e#7#161#0#PHP" expanded="true" />
@@ -705,7 +697,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/TestCase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="396">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
@@ -723,7 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/validation3.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+        <state relative-caret-position="452">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding />
         </state>
       </provider>

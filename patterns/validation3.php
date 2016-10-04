@@ -1,30 +1,36 @@
 <?php
-namespace validation3;
+//namespace validation3;
 
 class State
 {
-    private $check = true;
+    private $state;
+
+    public function __construct($state = true)
+    {
+        $this->state = $state;
+    }
 
     public function check($func, $arg)
     {
-        if ($this->check === true) {
-            $this->check = call_user_func($func, $arg);
+        if ($this->state === true) {
+            $this->state = call_user_func($func, $arg);
+            return new self($this->state);
         }
-        return $this;
+        return new self(false);
     }
 
     public function reset()
     {
-        $this->check = true;
+        return new self();
     }
 
     public function getState()
     {
-        return $this->check;
+        return $this->state;
     }
 }
 
-class Validation2
+class Validation3
 {
     /**
      * @var State
@@ -46,12 +52,12 @@ class Validation2
      */
     public function validate($sXml)
     {
-        $this->state->reset();
+        $state = $this->state->reset();
         foreach ($this->rules as $rule) {
-            $this->state->check("{$this->rulesClass}::{$rule}", $sXml);
+            $state = $state->check("{$this->rulesClass}::{$rule}", $sXml);
         }
 
-        return $this->state->getState();
+        return $state->getState();
     }
 }
 

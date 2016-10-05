@@ -33,12 +33,8 @@ class Verify extends State
 
     public function exec($func, $arg)
     {
-        $state = $this->getState();
-        if ($state === true) {
-            $state = call_user_func($func, $arg);
-            return ($state === true) ? new Success($state) : new Fail($state);
-        }
-        return new Fail($state);
+        $state = call_user_func($func, $arg);
+        return ($state === true) ? new Success($state) : new Fail($state);
     }
 
     public function factory()
@@ -51,7 +47,7 @@ class Fail extends State
 {
     public function exec($func, $arg)
     {
-        return new static($this->getState());
+        return new self($this->getState());
     }
 }
 
@@ -71,15 +67,15 @@ class Success extends State
 class Validation4
 {
     /**
-     * @var State
+     * @var Verify
      */
-    private $state;
+    private $verify;
     private $rules;
     private $rulesClass;
 
-    public function __construct(State $state, $rulesClass)
+    public function __construct(Verify $verify, $rulesClass)
     {
-        $this->state = $state;
+        $this->verify = $verify;
         $this->rulesClass = $rulesClass;
         $this->rules = get_class_methods($rulesClass);
     }
@@ -90,7 +86,7 @@ class Validation4
      */
     public function validate($sXml)
     {
-        $state = $this->state->factory(true);
+        $state = $this->verify->factory();
         var_dump($state);
         foreach ($this->rules as $rule) {
             $state = $state->exec("{$this->rulesClass}::{$rule}", $sXml);

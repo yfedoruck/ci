@@ -26,6 +26,7 @@ class VkUser extends User
 
 class ChatRoom
 {
+    /** provide the same behaviour for different users  */
     public function say($name, $message)
     {
         echo "User {$name} say: {$message}\n";

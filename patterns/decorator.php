@@ -1,17 +1,25 @@
 <?php
+namespace decorator;
 
 interface IText {
     function show();
 }
 
-class Text implements IText{
+class Hello implements IText{
     public function show(){
-        echo 'hello'."<br>";
+        echo "hello!";
+    }
+}
+
+class Bye implements IText{
+    public function show(){
+        echo "Bye!";
     }
 }
 
 /**
  * must implement interface for the sake of Liskov principle
+ * Decorator is opposite to Mediator on realization the same functional
  */
 class Decorator implements IText {
 
@@ -24,14 +32,16 @@ class Decorator implements IText {
     }
 
     public function show(){
-        echo '<b>';
-        $this->inst->show();
-        echo '</b>';
+        echo '*** ';
+            $this->inst->show();
+        echo ' ***';
     }
 }
 
-$t = new Text();
-$t->show();
+$helloDec = new Decorator(new Hello());
+$helloDec->show();
+echo "\n";
 
-$d = new Decorator($t);
-$d->show();
+$byeDec = new Decorator(new Bye());
+$byeDec->show();
+echo "\n";

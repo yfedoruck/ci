@@ -73,15 +73,15 @@ class Letter
 
     public function save($name)
     {
-        array_map(function($i) use ($name){
-            array_map(function($j) use ($i, $name){
-                $im = imagecreatetruecolor(30, 30)
-                    or die("Cannot Initialize new GD image stream");
+        $im = imagecreatetruecolor(30, 30);
+        array_map(function($i) use ($name, $im){
+            array_map(function($j) use ($i, $name, $im){
                 $color = imagecolorallocate ($im, $this->memory[$i][$j], $this->memory[$i][$j], $this->memory[$i][$j]);
                 imagesetpixel($im, $i, $j, $color);
-                imagepng($im, "./db/{$name}.png");
             }, range(0, 29));
         }, range(0, 29));
+        imagepng($im, "./db/{$name}.png");
+        imagedestroy($im);
     }
 
 }
@@ -136,7 +136,7 @@ class Main
         $net = new Net();
         $net->learnLetters();
         $net->work();
-        var_dump($net->letters[0]); die();
+//        var_dump($net->letters[0]); die();
     }
 }
 

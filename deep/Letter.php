@@ -5,6 +5,7 @@ namespace src;
 class Letter
 {
     public $name;
+    public $weight;
 
     /** @var  array */
     public $input;
@@ -35,6 +36,54 @@ class Letter
         }, range(0, 29));
     }
 
+    public function setInput($im)
+    {
+        array_map(function($i) use ($im){
+            array_map(function($j) use ($i, $im){
+                $rgb = imagecolorat($im, $i, $j);
+                $pix = imagecolorsforindex($im, $rgb);
+                $this->input[$i][$j] = round(($pix['red'] + $pix['green'] + $pix['blue']) / 3);
+            }, range(0, 29));
+        }, range(0, 29));
+    }
+
+    public function recognize()
+    {
+        array_map(function($i){
+            array_map(function($j) use ($i){
+                $input = $this->input[$i][$j];
+                $memory = $this->memory[$i][$j];
+                if (abs($input - $memory) < 120 && $input < 250) {
+                    ++$this->weight;
+                }
+                if ($input !== 0){
+                    if($input < 250){
+                        $memory = round( ($memory + ($memory + $input)/2)/2);
+                    }
+                    $this->memory[$i][$j] = $memory;
+                }elseif ($memory !==0){
+                    if($input < 250){
+                        $memory = round( ($memory + ($memory + $input)/2)/2);
+                    }
+                }
+                $this->memory[$i][$j] = $memory;
+            }, range(0, 29));
+        }, range(0, 29));
+    }
+
+    public function save($name)
+    {
+        array_map(function($i) use ($name){
+            array_map(function($j) use ($i, $name){
+                $im = imagecreatetruecolor(30, 30)
+                    or die("Cannot Initialize new GD image stream");
+                $color = imagecolorallocate ($im, $this->memory[$i][$j], $this->memory[$i][$j], $this->memory[$i][$j]);
+                imagesetpixel($im, $i, $j, $color);
+                imagepng($im, "./db/{$name}.png");
+            }, range(0, 29));
+        }, range(0, 29));
+    }
+
 }
 
 class Net {
@@ -50,32 +99,25 @@ class Net {
         $this->initBlank();
     }
 
-    public function iterateLetters()
+    public function learnLetters()
     {
-        $this->letters = array_map(function ($letter) {
-            $im        = imagecreatefrompng("./img/{$letter->name}.png");
-            $letter->memory = $this->iteratePixels($im, $letter->memory);
+        array_map(function (Letter $letter) {
+            $im             = imagecreatefrompng("./img/{$letter->name}.png");
+            $letter->iteratePixels($im);
             imagedestroy($im);
-
-            return $letter;
         }, $this->letters);
     }
 
-    public function iteratePixels($im, array $memory)
+    public function work()
     {
-        return array_map(function($i) use ($im, $memory){
-            array_map(function($j) use ($i, $im, $memory){
-                $rgb = imagecolorat($im, $i, $j);
-                $pix = imagecolorsforindex($im, $rgb);
-
-                $data = round(($pix['red'] + $pix['green'] + $pix['blue']) / 3);
-                $memory[$i][$j] = $data;
-                return $memory;
-            }, range(0, 29));
-            return $memory;
-        }, range(0, 29));
+        $im = imagecreatefrompng("./img/K.png");
+        array_map(function (Letter $letter) use ($im) {
+            $letter->setInput($im);
+            $letter->recognize();
+            $letter->save($letter->name);
+        }, $this->letters);
+        imagedestroy($im);
     }
-
 
     public function initBlank()
     {
@@ -92,6 +134,9 @@ class Main
     public function __construct()
     {
         $net = new Net();
+        $net->learnLetters();
+        $net->work();
+        var_dump($net->letters[0]); die();
     }
 }
 

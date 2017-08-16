@@ -3,32 +3,36 @@
 namespace ArrTree;
 
 
-class ArrTree {
-
+class ArrTree
+{
     public static function search($needle, array $haystack, $strict = null)
     {
-        $scalars = array_filter($haystack, function ($value) {
-            return !is_array($value);
-        });
+        $arrays = $scalars = [];
+        foreach ($haystack as $key => $value) {
+            if (is_array($value)) {
+                $arrays[$key] = $value;
+            } else {
+                $scalars[$key] = $value;
+            }
+        }
 
-        $found   = array_search($needle, $scalars, $strict);
-        if ($found) {
+        $found = array_search($needle, $scalars, $strict);
+        if ($found !== false) {
             return $found;
         }
 
-        $arrays = array_diff($haystack, $scalars);
         foreach ($arrays as $value) {
-            $found = self::search($needle, $value);
-            if ( ! is_null($found)) {
+            $found = self::search($needle, $value, $strict);
+            if ($found !== false) {
                 return $found;
             }
         }
 
-        return null;
+        return false;
     }
 }
 //
-$x = ArrTree::search('asd', [2, 3, []]);
+//$x = ArrTree::search('asd', [2, 3, []]);
 //$x = ArrTree::search('asd', [2, 'rty' => 'asd']);
 //var_dump( $x );
 
@@ -56,14 +60,15 @@ $x = ArrTree::search('asd', [2, 3, []]);
 //        return null;
 //    }
 
+//var_dump(array_search('qwe', [0]), true);
+//die("\n-qwe-\n");
 
-
-//var_dump( ArrTree::search('asd',
-//    [
-//        ['2334', '-1' => 1],
-//        [0, ['asd2'], 'd'],
-//        [[],[1,2,3, [2, 'rty' => 'asd']], []]
-//    ]) );
+var_dump( ArrTree::search('asd',
+    [
+        ['2334', '-1' => 1],
+        [0, ['sf' => 'asd2'], 'd'],
+        [[],[1,2,3, [2, 'rty' => 'asd']], []]
+    ], true) );
 
 //        array_map(function ($key, $value) use ($needle){
 //        }, array_keys($haystack), $haystack);

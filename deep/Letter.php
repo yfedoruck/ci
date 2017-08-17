@@ -49,21 +49,21 @@ class Letter
 
     public function recognize()
     {
-        array_map(function($i){
-            array_map(function($j) use ($i){
-                $input = $this->input[$i][$j];
+        array_map(function ($i) {
+            array_map(function ($j) use ($i) {
+                $input  = $this->input[$i][$j];
                 $memory = $this->memory[$i][$j];
                 if (abs($input - $memory) < 120 && $input < 250) {
                     ++$this->weight;
                 }
-                if ($input !== 0){
-                    if($input < 250){
-                        $memory = round( ($memory + ($memory + $input)/2)/2);
+                if ($input !== 0) {
+                    if ($input < 250) {
+                        $memory = round(($memory + ($memory + $input) / 2) / 2);
                     }
                     $this->memory[$i][$j] = $memory;
-                }elseif ($memory !==0){
-                    if($input < 250){
-                        $memory = round( ($memory + ($memory + $input)/2)/2);
+                } elseif ($memory !== 0) {
+                    if ($input < 250) {
+                        $memory = round(($memory + ($memory + $input) / 2) / 2);
                     }
                 }
                 $this->memory[$i][$j] = $memory;

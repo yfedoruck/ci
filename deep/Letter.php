@@ -110,13 +110,23 @@ class Net {
 
     public function work()
     {
-        $im = imagecreatefrompng("./img/K.png");
+        $im = imagecreatefrompng("./img/C.png");
         array_map(function (Letter $letter) use ($im) {
             $letter->setInput($im);
             $letter->recognize();
             $letter->save($letter->name);
         }, $this->letters);
         imagedestroy($im);
+    }
+
+    public function getMax()
+    {
+        return array_reduce($this->letters, function (Letter $carry, Letter $letter) {
+            if($letter->weight > $carry->weight) {
+                $carry = $letter;
+            }
+            return $carry;
+        }, $this->letters[0]);
     }
 
     public function initBlank()
@@ -136,6 +146,8 @@ class Main
         $net = new Net();
         $net->learnLetters();
         $net->work();
+        $m = $net->getMax();
+        var_dump($m->name);
 //        var_dump($net->letters[0]); die();
     }
 }

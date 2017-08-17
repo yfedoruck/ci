@@ -24,13 +24,13 @@ class Letter
         $this->memory = [];
     }
 
-    public function iteratePixels($im)
+    public function setMemory($im)
     {
         array_map(function($i) use ($im){
             array_map(function($j) use ($i, $im){
                 $rgb = imagecolorat($im, $i, $j);
                 $pix = imagecolorsforindex($im, $rgb);
-                $data = round(($pix['red'] + $pix['green'] + $pix['blue']) / 3);
+                $data = $this->getPixelColor($pix);
                 $this->memory[$i][$j] = $data;
             }, range(0, 29));
         }, range(0, 29));
@@ -42,7 +42,7 @@ class Letter
             array_map(function($j) use ($i, $im){
                 $rgb = imagecolorat($im, $i, $j);
                 $pix = imagecolorsforindex($im, $rgb);
-                $this->input[$i][$j] = round(($pix['red'] + $pix['green'] + $pix['blue']) / 3);
+                $this->input[$i][$j] = $this->getPixelColor($pix);
             }, range(0, 29));
         }, range(0, 29));
     }
@@ -84,6 +84,11 @@ class Letter
         imagedestroy($im);
     }
 
+    private function getPixelColor($pix)
+    {
+        return round(($pix['red'] + $pix['green'] + $pix['blue']) / 3);
+    }
+
 }
 
 class Net {
@@ -102,15 +107,15 @@ class Net {
     public function learnLetters()
     {
         array_map(function (Letter $letter) {
-            $im             = imagecreatefrompng("./img/{$letter->name}.png");
-            $letter->iteratePixels($im);
+            $im = imagecreatefrompng("./img/{$letter->name}.png");
+            $letter->setMemory($im);
             imagedestroy($im);
         }, $this->letters);
     }
 
     public function work()
     {
-        $im = imagecreatefrompng("./img/C.png");
+        $im = imagecreatefrompng("./img/T.png");
         array_map(function (Letter $letter) use ($im) {
             $letter->setInput($im);
             $letter->recognize();
@@ -134,7 +139,7 @@ class Net {
         $im = imagecreatefrompng("./img/blank.png");
         /** @var Letter $letter */
         foreach ($this->letters as $letter) {
-            $letter->iteratePixels($im);
+            $letter->setMemory($im);
         }
     }
 }
